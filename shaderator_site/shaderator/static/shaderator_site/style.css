@@ -1,0 +1,289 @@
+/* @font-face {
+  font-family: 'BebasNeue';
+  src: url('/static/fonts/BebasNeue.ttf');
+  src: local('BebasNeue'), url('/static/fonts/BebasNeue.ttf');
+} */
+
+@import url("https://fonts.googleapis.com/css2?family=Exo+2&family=Oswald&display=swap");
+
+.prim_text{
+  color: #ffff;
+  letter-spacing: .1rem;
+  /* font-family: 'Console', monospace; */
+  /* font-family: BebasNeue; */
+  /* font-family: "Lucida Console", Monaco, monospace; */
+  /* font-family: "Oswald", sans-serif;  */
+  font-family: "Exo 2", sans-serif;
+  padding-left:10px;
+  padding-right:10px;
+  /* white-space: normal; */
+}
+
+.sec_text{
+  color: #b3b3b3;
+  letter-spacing: .02rem;
+  /* color:#bcbcbc; */
+  /* font-family: BebasNeue, fantasy; */
+  /* font-family: "Lucida Console", Monaco, monospace; */
+  /* font-family: "Oswald", sans-serif; */
+  font-family: "Exo 2", sans-serif;
+  white-space: normal;
+  word-wrap: break-word;
+  /* padding-left:8px; */
+  /* padding-right:8px; */
+}
+
+.third_text{
+  letter-spacing: .1rem;
+  color: #b3b3b3;
+  /* font-family: BebasNeue, fantasy; */
+  /* font-family: "Lucida Console", Monaco, monospace; */
+  font-family: "Oswald", sans-serif;
+  white-space: normal;
+  word-wrap: break-word;
+  max-width: 800px; /* Limit the width for better readability */
+  margin: 0 auto;  /* Center the text block */
+  text-align: justify; /* Justify for better structure */
+  line-height: 1.5; /* Improve spacing between lines */
+}
+
+section {
+  box-sizing: border-box;
+  padding:5px;
+}
+
+.shadertoy {
+  position: inherit;
+  /* padding: 10px; */
+  height:100%;
+  width:100%;
+}
+
+body {
+    font: 14px; 
+    height: 100%;
+    width:100%;
+    background: #040D12;
+    /* background: white; */
+}
+
+div {
+  white-space: normal;
+  /* padding-left:10px; */
+  /* padding-right:10px; */
+}
+
+/* CSS */
+.button {
+  appearance: none;
+  background-color: #2ea44f;
+  border: 1px solid rgba(27, 31, 35, .15);
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  padding: 6px 16px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.button-cancel{
+  background-color:#d00e0e;
+}
+.button:focus:not(:focus-visible):not(.focus-visible) {
+  box-shadow: none;
+  outline: none;
+}
+
+.button:hover {
+  background-color: #2c974b;
+}
+.button-cancel:hover{
+  background-color:#931414;
+}
+.button:focus {
+  box-shadow: rgba(46, 164, 79, .4) 0 0 0 3px;
+  outline: none;
+}
+
+.button-cancel:focus{
+  background-color:#771515;
+}
+
+.button:disabled {
+  background-color: #94d3a2;
+  border-color: rgba(27, 31, 35, .1);
+  color: rgba(255, 255, 255, .8);
+  cursor: default;
+}
+
+.button:active {
+  background-color: #298e46;
+  box-shadow: rgba(20, 70, 32, .2) 0 1px 0 inset;
+}
+
+.button-cancel:active {
+  background-color: #771515;
+  box-shadow: rgba(20, 70, 32, .2) 0 1px 0 inset;
+}
+
+textarea {
+  width: 100%;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  font-size: 16px;
+  resize: none;
+}
+
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.horizontal-center {
+  left: 40%;
+}
+
+/* FOR RADIO BUTTONS */
+
+/* The container */
+.radio_container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: white;
+}
+
+/* Hide the browser's default radio button */
+.radio_container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+.radiomark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #298e46;
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.radio_container:hover input ~ .radiomark {
+  background-color: #b51cb5;
+}
+
+/* When the radio button is checked, add a blue background */
+.radio_container input:checked ~ .radiomark {
+  background-color: #a6d50c;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.radiomark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.radio_container input:checked ~ .radiomark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.radio_container .radiomark:after {
+ 	top: 9px;
+	left: 9px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: #d00e0e;
+}
+
+/* ==============================================================  */
+
+/* Slider Styles */
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 10px;
+  background: #298e46;
+  border-radius: 5px;
+  outline: none;
+  opacity: 0.9;
+  transition: opacity 0.2s;
+  cursor: pointer;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #a6d50c;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #a6d50c;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.slider::-ms-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #a6d50c;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* ==============================================================  */

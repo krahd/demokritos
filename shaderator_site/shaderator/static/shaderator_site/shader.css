@@ -1,0 +1,266 @@
+@import url("https://webglfundamentals.org/webgl/resources/webgl-tutorials.css");        
+
+.playpause {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    width: 100%;
+    height: 100%;
+    font-size: 60px;
+    justify-content: center;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.3);
+    transition: opacity 0.2s ease-in-out;
+}
+.playpausehide,
+.playpause:hover {
+    opacity: 0;
+}
+.iframe .divcanvas {
+    display: block;
+}
+.input-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+#sendMessageButton {
+      margin-left: 10px; /* Add some space between textarea and button */
+}
+.loading {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left-color: #000;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #040D12;
+    color: #fff;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    max-width: 1200px;
+    box-sizing: border-box;
+    height: 100%;
+}
+
+.row {
+    display: flex;
+    width: 100%;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+.row.first-row {
+    flex: 1; /* First row takes up 1/3 of the height */
+}
+
+.row.second-row {
+    flex: 2; /* Second and third rows combined take up 2/3 of the height */
+    flex-direction: column;
+}
+
+.column {
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.column:first-child {
+    flex: 1; /* Equal width for both columns */
+}
+
+.column:nth-child(2) {
+    flex: 1; /* Equal width for both columns */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.tab-content-container {
+    width: 100%;
+    position: relative;
+    background-color: #000;
+    box-sizing: border-box;
+    flex-grow: 1;
+    overflow: hidden; /* Prevent overflow causing layout issues */
+}
+
+.tab-container {
+    position: sticky;
+    top: 0;
+    z-index: 5; /* Ensure tabs are always on top */
+    display: flex;
+    justify-content: center;
+    background-color: #222;
+    border-bottom: 1px solid #444;
+}
+
+.tab-button {
+    background-color: #444;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    flex-grow: 1;
+}
+
+.tab-button.active {
+    background-color: #888;
+}
+
+.tab-content {
+    position: absolute; /* Stacks tabs */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 40px); /* Ensure space for tab buttons */
+    visibility: hidden; /* Hidden by default */
+    opacity: 0; /* Fully transparent */
+    pointer-events: none; /* Disable interactions */
+    transition: opacity 0.3s ease; /* Smooth transitions */
+    z-index: 1; /* Tabs sit below the Play button */
+}
+
+.tab-content.active {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 2; /* Active tab sits above the inactive tabs */
+}
+
+.divcanvas,
+.code-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%; /* Ensure they occupy full tab content area */
+    margin: 0; /* Remove extra spacing */
+    box-sizing: border-box;
+    overflow: hidden; /* Prevent overflow */
+}
+
+canvas {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Ensures content fits canvas bounds */
+    display: block; /* Prevent inline issues */
+    z-index: 1; /* Sits below the Play button */
+}
+
+ 
+textarea {
+    width: 100%;
+    height: auto;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    resize: none;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+
+#shaderCode {
+    width: 100%;
+    height: 100%; /* Fill the parent container */
+    /* background-color: #000; */
+    background-color: rgba(0, 0, 0, 0.1); /* Semi-transparent background for textarea */
+    color: #0f0; /* Bright green for code */
+    border: 1px solid #444; /* Optional border for distinction */
+    resize: none; /* Disable manual resizing */
+    overflow: auto; /* Allow scrolling for long content */
+    padding: 10px; /* Add padding for readability */
+    box-sizing: border-box; /* Include padding and border in dimensions */
+    font-family: monospace; /* Ensure a monospace font for code */
+    font-size: 14px; /* Adjust font size for readability */
+    line-height: 1.5; /* Set a consistent line height */
+    white-space: pre-wrap; /* Preserve formatting of the code */
+    word-wrap: break-word; /* Break long lines gracefully */
+}
+
+.input-container {
+    width: 100%;
+}
+
+.rating-container {
+    width: 100%;
+}
+
+/* Set the CanvasTab to always be visible */
+#CanvasTab {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Place it behind the overlay */
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto; /* Allow interactions with the canvas */
+}
+
+/* Style the Code tab to appear as an overlay */
+#Code {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2; /* Place it above the canvas */
+    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+    color: #0f0; /* Bright green text for code */
+    visibility: hidden; /* Hidden by default */
+    opacity: 0; /* Fully transparent by default */
+    pointer-events: none; /* Disable interactions by default */
+    transition: opacity 0.3s ease; /* Smooth transition */
+}
+
+/* Make the active tab visible */
+#Code.active {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto; /* Enable interactions */
+}
+
+.overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 48px;
+    /* color: rgba(255, 255, 255, 0.7); */
+    z-index: 1; /* Place it behind the overlay */
+    color: #0f0; /* Bright green for code */
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px 20px;
+    border-radius: 10px;
+    pointer-events: none; /* So it doesn't block clicks on the canvas */
+    transition: opacity 0.3s ease-in-out;
+    opacity: 0; /* Initially hidden */
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    white-space: pre-wrap;
+    margin-top: 10px;
+}

@@ -1,0 +1,120 @@
+/* Header container: fixed at top, spans full width, and uses flexbox */
+.header-container {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    /* Optional: background for contrast */
+    padding: 5px 10px;
+    pointer-events: none;
+}
+
+/* General button style */
+.header-button {
+    /* background: #444; */
+    background: #040D12;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+    display: inline-block;
+    font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+}
+
+.header-container .header-button {
+    pointer-events: auto; /* Allow clicks on the buttons */
+}
+
+/* Hover effect */
+/* .header-button:hover {
+    background: #666;
+} */
+
+.header-button:hover {
+    border-color: white;
+    /* Optionally, add a slight background tint on hover */
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* .home-button {
+    background: #444;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+    display: inline-block;
+    font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+    white-space: nowrap;
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 1000;
+} */
+
+.home-button{
+    position: fixed;
+    top: 15px;
+    right: 15px;
+}
+
+.header-button, .home-button {
+    background: transparent;
+    color: white;
+    padding: 10px 20px;
+    border: 2px solid transparent;  /* Reserve space for border */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: border 0.3s ease-in-out, background-color 0.3s ease-in-out;
+    display: inline-block;
+    font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+}
+
+.header-container .home-button {
+    pointer-events: auto; /* Allow clicks on the buttons */
+}
+
+.left-buttons, .right-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.github-icon {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}

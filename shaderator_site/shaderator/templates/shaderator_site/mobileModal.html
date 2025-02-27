@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>SHADESCRIBER</title>
+      {% load static %}
+      <link rel="stylesheet" href="{% static 'shaderator_site/style.css' %}"/>
+      <link rel="stylesheet" href="{% static 'shaderator_site/modal.css' %}"/>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+   </head>
+
+    <div>
+        <div>
+            <h2 class="sec_text">Before we start desribing shaders, a couple of questions:</h2>
+        </div>
+        <div style="padding-left:30px">
+            <!-- <form method="POST" action="storeUserInfo"> -->
+            <form method="POST" action="{% url 'store-user-info' %}">
+            {% csrf_token %}
+            <h3 class="third_text">
+                Do you have experience with shaders and shader programming?
+            </h3>
+            <label class="third_text radio_container horizontal-center">
+                <input type="radio" class="radio" name="familiarity" value="1">Yes</input>
+                <span class="radiomark"></span>
+            </label>
+            <label class="third_text radio_container horizontal-center"> 
+                <input type="radio" class="radio" name="familiarity" value="0">No</input>
+                <span class="radiomark"></span>
+            </label>
+            <h3 class="third_text">
+                Have you studied or worked in the field of computer science?
+            </h3>
+            <label class="third_text radio_container horizontal-center">
+                <input type="radio" class="radio" name="csience" value="1">Yes</input>
+                <span class="radiomark"></span>
+            </label>
+            <label class="third_text radio_container horizontal-center"> 
+                <input type="radio" class="radio" name="csience" value="0">No</input>
+                <span class="radiomark"></span>
+            </label>
+            <h3 class="third_text">
+                Have you previously programmed software?
+            </h3>
+            <label class="third_text radio_container horizontal-center">
+                <input type="radio" class="radio" name="programming" value="1">Yes</input>
+                <span class="radiomark"></span>
+            </label>
+            <label class="third_text radio_container horizontal-center"> 
+                <input type="radio" class="radio" name="programming" value="0">No</input>
+                <span class="radiomark"></span>
+            </label>
+            <h3 class="third_text">
+                Are you involved or interested in New Media Art or Graphic Design?
+            </h3>
+            <label class="third_text radio_container horizontal-center">
+                <input  type="radio" class="radio" name="nma" value="1">Yes</input>
+                <span class="radiomark"></span>
+            </label>
+            <label class="third_text radio_container horizontal-center"> 
+                <input type="radio" class="radio" name="nma" value="0">No</input>
+                <span class="radiomark"></span>
+            </label>
+            <div>
+                <button class="button" role="button" type="submit" disabled>Submit</button>
+                <a href="#cancel" title="Cancel" class="button button-cancel">Cancel</a>
+                <div class="clear"></div>
+            </div>  
+            </form>
+        </div>
+    </div>
+</html>
+
+<script>
+
+if (window.location.hostname !== 'localhost') {
+    console.log = function() {};
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+   var radioButtons = document.querySelectorAll('input[type="radio"]');
+   var submitButton = document.querySelector('button[type="submit"]');
+
+   function checkForm() {
+         var allQuestionsAnswered = true;
+         radioButtons.forEach(function(radioButton) {
+            var questionName = radioButton.name;
+            if (!document.querySelector('input[name="' + questionName + '"]:checked')) {
+               allQuestionsAnswered = false;
+            }
+         });
+
+         submitButton.disabled = !allQuestionsAnswered;
+   }
+
+   radioButtons.forEach(function(radioButton) {
+         radioButton.addEventListener('change', checkForm);
+   });
+});
+
+</script>

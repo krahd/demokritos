@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demokritos - Interactive, Community-Centred, Self-Improving Shader Generation using Large Language Models</title>
+    {% load static %}
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'shaderator_site/style.css' %}"/>
+    <link rel="stylesheet" href="{% static 'shaderator_site/flex.css' %}"/>
+    <link rel="stylesheet" href="{% static 'shaderator_site/modal.css' %}"/>
+    <link rel="stylesheet" href="{% static 'shaderator_site/home-button.css' %}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+</head>
+<body>
+    <header class="header-container">
+        <div class="left-buttons">
+            <a href="{% url 'download_corpus' %}" class="header-button">Corpus Downloader</a>            
+        </div>
+        <div class="right-buttons">
+            <a id="openWhyDemokritosModal" class="header-button">Why Demokritos</a>
+            <a id="openAboutUsModal" class="header-button">Authors</a>
+            <a href="https://github.com/es-eph/demokritos" class="header-button" target="_blank">
+                <img src="{% static 'images/github-icon.png' %}" class="github-icon">
+            </a>
+            <!-- <a href="/start/" class="header-button">Home</a> -->
+        </div>
+    </header>
+    
+    <div>
+        <p class="prim_text" style="text-align:center; font-size: 72px;">DEMOKRITOS</p>
+        <p class="third_text">
+            Demokritos explores the intersection of artificial intelligence and computer graphics, 
+            aiming to develop a comprehensive corpus of shaders that serves as a foundation for 
+            generating innovative and dynamic real-time graphics.
+        </p><br/>
+        <p class="third_text">
+            By curating a diverse collection of shaders, Demokritos strives to create a 
+            powerful resource for computer graphics development—where existing techniques 
+            inspire and drive the creation of cutting-edge visual effects.
+        </p><br/>
+    </div>
+    
+    <h2 class="third_text">Select an Application</h2>
+    <div class="bottom-container app-links">
+        <div class="left app-link">
+            <a href="{% url 'shader_view' %}" style="text-decoration: none;">
+                <img src="{% static 'images/shadergen.png' %}" alt="Corpus Generator App" class="app-image">
+                <h3 class="sec_text">Shader Generation</h3>
+                <p class="third_text">
+                    Try out some prompts and see what they generate!
+                    You can store the result so it can be used as example for new shaders.
+                </p>
+            </a>
+        </div>
+        <div class="right app-link"> 
+            <a href="{% url 'home' %}" style="text-decoration: none;">
+                <img src="{% static 'images/shaderdescriptor.png' %}" alt="Corpus Generator App" class="app-image">
+                <h3 class="sec_text">Corpus Generator</h3>
+                <p class="third_text">
+                    Help create a corpus that will retroactively be used to generate new shaders.
+                </p>
+            </a>
+        </div>
+    </div>
+    
+    <footer class="third-text">
+        <p>Universidad de la República Oriental del Uruguay - Facultad de Ingeniería.</p>
+    </footer>
+
+    <div id="whyDemokritosModal" class="modalWindow bg">
+        <div class="modalHeader">
+            <h2 class="prim_text">Why Demokritos...?</h2>
+            <a href="#" class="close" onclick="closeModal()">X</a>
+        </div>
+        <div class="modalContent">
+            <p class="sec_text" style="font-size: large;">
+                The name "Demokritos" means "chosen by the people," highlighting the collaborative effort behind our training 
+                corpus and the active evaluation by our community. Moreover, Demokritos was a brilliant pre-Socratic philosopher, 
+                a contemporary of Socrates, who wrote about vision, light, and geometry—among many other subjects. 
+                He proposed that everything is composed of atoms, and that what is not an atom is void. 
+                According to him, by nature nothing has inherent color; both matter and void lack qualities. 
+                It is only through their arrangement, structure, and dynamic interaction—order, form, and position—that 
+                compounds acquire color and meaning.
+            </p>
+        </div>
+    </div>
+</body>
+
+<div id="aboutUsModal" class="modalWindow bg">
+    <div>
+        <div class="modalHeader">
+            <h2 class="prim_text">Authors</h2>
+            <a href="#" class="close" onclick="closeModal()">X</a>
+        </div>
+        <div class="modalContent">
+            <p class="sec_text">
+                <strong>Santiago Ferrando</strong><br>
+                Email: santiago.ferrando@fing.edu.uy<br>
+                Country: Uruguay<br>
+                Institution: Universidad de la República
+            </p>
+            <p class="sec_text">
+                <strong>Christian Clark</strong><br>
+                Email: cclark@fing.edu.uy<br>
+                Country: Uruguay<br>
+                Institution: Universidad de la República
+            </p>
+            <p class="sec_text">
+                <strong>Tomas Laurenzo</strong><br>
+                <a href="https://laurenzo.net" target="_blank">Website</a><br>
+                Email: tomas@laurenzo.net<br>
+                Country: United States<br>
+                Institution: University of Colorado, Boulder
+            </p>
+        </div>
+    </div>
+</div>
+
+
+<style>
+.app-links {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+    gap: 20px; /* Adds padding between the divs */
+}
+
+.app-link {
+    text-align: center;
+    width: 300px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #333;
+    transition: transform 0.3s, filter 0.3s;
+}
+
+.app-link:hover {
+    transform: scale(1.05);
+}
+
+/* Apply blur to all siblings except the hovered one */
+.app-link:hover ~ .app-link,
+.app-link:hover + .app-link,
+.app-links:hover .app-link:not(:hover) {
+    filter: blur(4px);
+}
+
+/* Reset the blur when not hovering */
+.app-links:hover .app-link {
+    filter: none;
+}
+
+.app-image {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+.app-link h3 {
+    margin: 10px 0;
+    font-size: 1.5em;
+}
+
+.app-link p {
+    font-size: 1em;
+    color: #666;
+}
+
+</style>
+
+<script>
+
+document.getElementById("openWhyDemokritosModal").addEventListener("click", function() {
+    openWhyDemkritosModal();
+});
+
+document.getElementById("openAboutUsModal").addEventListener("click", function() {
+    openAboutUsModal();
+});
+
+function openWhyDemkritosModal() {
+    location.href='#whyDemokritosModal';
+    document.body.classList.add('modal-active');
+}
+
+function openAboutUsModal(){
+    location.href='#aboutUsModal';
+    document.body.classList.add('modal-active');
+}
+
+function closeModal() {
+    // Remove the hash from the URL
+    history.pushState("", document.title, window.location.pathname + window.location.search);
+    // Remove class that disables background scrolling
+    document.body.classList.remove('modal-active');
+}
+
+</script>

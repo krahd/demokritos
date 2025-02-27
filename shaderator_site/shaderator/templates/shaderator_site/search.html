@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demokritos - Shader Corpus & RAG Test</title>
+    {% load static %}
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'shaderator_site/style.css' %}"/>
+    <link rel="stylesheet" href="{% static 'shaderator_site/shader.css' %}"/>
+    <link rel="stylesheet" href="{% static 'shaderator_site/home-button.css' %}"/>
+    <style>
+        .results {
+            margin-top: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-container">
+        <a href="{% url 'download_corpus' %}" class="header-button left-button">Corpus Downloader</a>
+        <a href="/start/" class="header-button header-button">🏠 Home</a>
+    </div>
+    <h1 class="prim_text">Shader Corpus & RAG Test</h1>
+
+    <!-- Download Corpus Section -->
+    <h2 class="sec_text">Download Full Corpus</h2>
+    <p class="sec_text" style="text-align: left;">Click below to download the full shader corpus as a CSV file.</p>
+    <a href="{% url 'download_corpus' %}" download="shader_corpus.csv">
+        <button class="button" type="button">Download Corpus</button>
+    </a>
+
+    <hr>
+
+    <!-- RAG Search Section -->
+    <h2 class="sec_text">Test RAG Retrieval</h2>
+    <form method="post" action="{% url 'search_shader_descriptions' %}">
+        {% csrf_token %}
+        <textarea placeholder="Enter shader description" cols="80" rows="5"></textarea>
+        <button class="button" type="submit">Search</button>
+    </form>
+
+    {% if results %}
+        <div class="results">
+            <h2 class="sec_text">Search Results</h2>
+            <ul>
+                {% for shader_id, prompt in results %}
+                    <li class="third_text"><strong>ID:</strong> {{ shader_id }} <br> <strong>Description:</strong> {{ prompt }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+</body>
+</html>

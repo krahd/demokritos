@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demokritos - Corpus Generator</title>
+  {% load static %}
+  <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+  <link rel="stylesheet" href="{% static 'shaderator_site/style.css' %}"/> home-button
+  <link rel="stylesheet" href="{% static 'shaderator_site/flex.css' %}"/>
+  <link rel="stylesheet" href="{% static 'shaderator_site/home-button.css' %}"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+</head>
+<body>
+  <div class="header-container">
+    <a href="/start/" class="header-button home-button">🏠 Home</a>
+  </div>
+  <!-- SHADER PLAYER -->
+  <div class="top-container" style="min-height: 50%;">
+    <section class="shadertoy">
+      <iframe allowtransparence="true" src="https://www.shadertoy.com/embed/{{random_shader}}?gui=true&t=10&paused=false&muted=false" allowfullscreen="allowfullscreen" height="100%" width="100%"></iframe>
+    </section>
+  </div>
+  <div class="bottom-container">
+    <div class="left">
+      <h1 class="prim_text">Title of Shader: {{shader_name}}</h1>
+      <h2 class="sec_text"> by {{shader_username}} </h2>
+      <a class="sec_text" href="https://www.shadertoy.com/view/{{random_shader}}" title=" Ver en Shadertoy" target="_blank"> >>> Link to Shadertoy <<<</a>
+    </div>
+    <div class="right">
+      <h2 class="sec_text"> Description: </h2>
+      <h3 class="sec_text">{{shader_desc}}</h3>
+    </div>
+  </div>
+  <div class="third">
+    <form method="POST" action="{% url 'store-input' %}" id="shaderForm">
+      {% csrf_token %}
+      <input type="hidden" name="shader_id" value="{{id}}"></input>
+      <textarea id='input_text' name="paragraph_text" 
+        placeholder="Please describe what you see in the shader. You can mention colors, shapes, movements, and any visual effects you notice. The more detailed your description, the better it will help us understand the shader's appearance and behavior. Feel free to be as creative as you'd like!" 
+        cols="80" rows="5"></textarea>
+      <button class="button" role="button" type="submit">Submit</button>
+    </form>
+  </div>
+</body>
+</html>
+
+<script>
+  var $button = $("button");
+  $button.prop("disabled", true);
+
+  $("#input_text").keyup(function() {
+    $button.prop("disabled", this.value.length < 10);
+  });
+
+  $("#shaderForm").on('submit', function() {
+    $button.prop("disabled", true); // Disable the submit button when the form is sent
+  });
+</script>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Thanks!</title>
+      {% load static %}
+      <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+      <link rel="stylesheet" href="{% static 'shaderator_site/style.css' %}"/>
+      <meta http-equiv = "refresh" content = "5; url =" />
+      <script>
+         // Function to start the countdown
+         function startCountdown() {
+             var countdown = 5; // Countdown time in seconds
+             var countdownDisplay = document.getElementById('countdown-display');
+ 
+             var countdownInterval = setInterval(function() {
+                 countdownDisplay.textContent = countdown;
+                 countdown--;
+ 
+                 if (countdown < 0) {
+                     clearInterval(countdownInterval); // Stop the countdown
+                 }
+             }, 1000); // Update every 1 second (1000 milliseconds)
+         }
+ 
+         // Call the startCountdown function when the page loads
+         window.addEventListener('load', startCountdown);
+     </script>
+   </head>
+   <body>
+      <div class="center">
+        <h1 class="prim_text"> THANK YOU!</h1>
+        <h2 class="sec_text">This page will redirect you in <span id="countdown-display">5</span> seconds...</h2>
+      </div>
+   </body>
+</html>

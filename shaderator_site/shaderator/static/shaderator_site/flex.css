@@ -1,0 +1,71 @@
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Set the body to take the full viewport height */
+    margin: 0; /* Remove default margins */
+}
+
+.top-container {
+    display: flex;
+    width: 100%;
+    flex: 1; /* Allow the top container to take 50% of the available height */
+}
+
+.bottom-container {
+    display: flex;
+    width: 100%;
+    flex: 1; /* Allow the bottom container to take 50% of the available height */
+}
+
+.left, .right {
+    flex: 1; /* Each column in the bottom container takes 50% of the available width */
+    padding: 10px; /* Add padding for spacing between columns */
+}
+
+/* Apply styles to individual divs for demonstration */
+.top-container div, .bottom-container div {
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.top-container, .bottom-container, .description-container {
+    max-width: 90%;
+    /* min-height: 50%; */
+    margin: 0 auto;
+    text-align: center;
+    padding: 20px;
+}
+
+.third{
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    flex: 0; /* Prevent it from taking up extra space */
+    /* background-color: #f0f0f0; Add a background color for clarity */
+    display: flex;
+    flex-direction: column; /* Stack textarea and button vertically */
+    align-items: center; /* Center content horizontally */
+    justify-content: space-between; /* Add space between textarea and button */
+}
+
+/* Shadertoy player */
+.shader-display {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+} */
+
+.shader-display iframe {
+    width: 90%;
+    max-width: 800px;
+    height: 450px;
+    border-radius: 10px;
+}
+
+/* Example descriptions */
+.example {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-left: 4px solid #fff;
+    font-style: italic;
+}

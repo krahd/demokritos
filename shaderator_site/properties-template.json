@@ -1,0 +1,9 @@
+{
+	"open_ai_key": "<<open_ai_key>>",
+	"fine_tuned_model_en": "ft:gpt-3.5-turbo-0125:universidad-de-la-republica-oriental-del-uruguay::97peWvkg",
+	"default_model_3_5": "gpt-3.5-turbo-0125",
+	"default_model" : "gpt-4o",
+	"claude_ai_key":"<<claude_ai_key>>",
+	"claude_model":"claude-3-5-sonnet-20240620",
+	"output" : ""
+} 
