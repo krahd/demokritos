@@ -130,9 +130,39 @@ def initialize_faiss_index(corpus_model):
     return None, None
 
 # Initialize FAISS indices for the three different corpora
-human_faiss_index, human_corpus = initialize_faiss_index(ShadescriptorCorpus)
-synthetic_faiss_index, synthetic_corpus = initialize_faiss_index(SandboxGLSLCorpus)
-generated_faiss_index, generated_corpus = initialize_faiss_index(GeneratedShaderCode)
+human_faiss_index = None
+human_corpus = None
+
+def get_human_faiss_index_and_corpus():
+    global human_faiss_index, human_corpus
+    if human_faiss_index is None or human_corpus is None:
+        human_faiss_index, human_corpus = initialize_faiss_index(ShadescriptorCorpus)
+    return human_faiss_index, human_corpus
+
+# Global variables for synthetic data
+synthetic_faiss_index = None
+synthetic_corpus = None
+
+def get_synthetic_faiss_index_and_corpus():
+    global synthetic_faiss_index, synthetic_corpus
+    if synthetic_faiss_index is None or synthetic_corpus is None:
+        synthetic_faiss_index, synthetic_corpus = initialize_faiss_index(SandboxGLSLCorpus)
+    return synthetic_faiss_index, synthetic_corpus
+
+
+# Global variables for generated data
+generated_faiss_index = None
+generated_corpus = None
+
+def get_generated_faiss_index_and_corpus():
+    global generated_faiss_index, generated_corpus
+    if generated_faiss_index is None or generated_corpus is None:
+        generated_faiss_index, generated_corpus = initialize_faiss_index(GeneratedShaderCode)
+    return generated_faiss_index, generated_corpus
+
+# human_faiss_index, human_corpus = initialize_faiss_index(ShadescriptorCorpus)
+# synthetic_faiss_index, synthetic_corpus = initialize_faiss_index(SandboxGLSLCorpus)
+# generated_faiss_index, generated_corpus = initialize_faiss_index(GeneratedShaderCode)
 
 
 def retrieve_examples(query, faiss_index, corpus):
@@ -177,6 +207,11 @@ def search_shader_descriptions(request):
         query_description = request.POST.get('prompt', '')
         query_vector = model.encode([query_description])[0]
         # indices = faiss_index.search(np.array([query_vector], dtype=np.float32), k=3)[1][0]
+        
+        # Get the FAISS indices and corpora
+        get_human_faiss_index_and_corpus()
+        get_synthetic_faiss_index_and_corpus()
+        get_generated_faiss_index_and_corpus()
 
         indices = human_faiss_index.search(np.array([query_vector], dtype=np.float32), k=3)[1][0]
 
@@ -215,16 +250,16 @@ def download_corpus(request):
     writer = csv.writer(response)
     writer.writerow(['ID', 'Source', 'Description', 'Code'])
 
+    get_human_faiss_index_and_corpus()
+    get_synthetic_faiss_index_and_corpus()
+    get_generated_faiss_index_and_corpus()
+
     # Combine all corpora into one list
-    # full_corpus = human_corpus + synthetic_corpus + generated_corpus
     full_corpus = list(human_corpus) + list(synthetic_corpus) + list(generated_corpus)
 
     for shader in full_corpus:
         # Use shader.prompt.source instead of shader.source
         writer.writerow([shader.id, shader.prompt.source, shader.get_prompt().text, shader.get_code()])
-
-    # for shader in full_corpus:
-    #     writer.writerow([shader.id, shader.source, shader.get_prompt().text])
 
     return response
 
@@ -348,6 +383,10 @@ def shader_view(request):
             defaults={'vector': prompt_vector, 'source': 'user'}
         )
 
+        get_human_faiss_index_and_corpus()
+        get_synthetic_faiss_index_and_corpus()
+        get_generated_faiss_index_and_corpus()
+        
         # Retrieve relevant examples from both corpora
         human_examples = retrieve_examples(prompt_text, human_faiss_index, human_corpus)
         synthetic_examples = retrieve_examples(prompt_text, synthetic_faiss_index, synthetic_corpus)
