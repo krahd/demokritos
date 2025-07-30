@@ -1,7 +1,7 @@
 
 # Demokritos: Interactive, Community-Centred, Self-Improving Shader Generation using Large Language Models 
 
-**This project was developed was partially supported by the [2024 Arts & Humanities Grant Program](https://www.colorado.edu/researchinnovation/2024/05/03/seventeen-arts-humanities-projects-receive-grants-advance-scholarship-research-and) of the [Research & Innovation Office](https://www.colorado.edu/researchinnovation/) at the University of Colorado Boulder.** 
+**This project was partially supported by the [2024 Arts & Humanities Grant Program](https://www.colorado.edu/researchinnovation/2024/05/03/seventeen-arts-humanities-projects-receive-grants-advance-scholarship-research-and) of the [Research & Innovation Office](https://www.colorado.edu/researchinnovation/) at the University of Colorado Boulder.** 
 
 While LLMs have shown effectiveness in generating code for various languages and contexts, producing shaders—specialised GPU programs essential for computer graphics rendering—from user-provided descriptions remains a complex challenge. 
 
